@@ -34,3 +34,8 @@ Cargo.lock
 *.pdb
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Vim,Rust
+
+
+# Added by cargo
+
+/target
