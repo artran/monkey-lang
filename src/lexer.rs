@@ -122,7 +122,7 @@ impl Lexer {
 * Tests
 ******************************************************************************/
 #[cfg(test)]
-mod exoected {
+mod tests {
     use super::*;
     use rstest::*;
     use speculoos::prelude::*;
