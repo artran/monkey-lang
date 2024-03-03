@@ -23,7 +23,6 @@ impl Lexer {
             self.current_char = self.input.chars().nth(self.next_position).unwrap();
         }
         self.next_position += 1;
-        dbg!(&self.current_char);
     }
 
     /// Push back the current character to the input
@@ -54,7 +53,6 @@ impl Lexer {
 
     fn skip_whitespace(&mut self) {
         while self.current_char.is_ascii_whitespace() {
-            dbg!("skip_whitespace");
             self.read_char();
         }
     }
@@ -239,7 +237,6 @@ mod tests {
 
         for test in expected {
             let tok = l.next_token();
-            dbg!(&tok);
             assert_that!(tok).is_equal_to(test);
         }
     }
