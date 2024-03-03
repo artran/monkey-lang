@@ -1,18 +1,10 @@
 mod lexer;
+mod repl;
 mod token;
 
-use lexer::Lexer;
+use repl::Repl;
 
 fn main() {
-    let input = r#"
-        let five = 5;
-        let ten = 10;
-        let add = fn(x, y) {
-            x + y;
-        };
-        let result = add(five, ten);
-        "#;
-
-    let mut l = Lexer::new(input.to_string());
-    println!("{:?}", l.next_token());
+    let mut repl = Repl::new();
+    repl.run();
 }
