@@ -12,6 +12,8 @@ pub(crate) enum Token {
     Slash,
     LT,
     GT,
+    EQ,
+    NE,
     Comma,
     Semicolon,
     LParen,

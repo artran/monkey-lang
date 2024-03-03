@@ -32,6 +32,14 @@ impl Lexer {
         self.current_char = self.input.chars().nth(self.next_position).unwrap();
     }
 
+    fn peek_char(&self) -> Option<char> {
+        if self.next_position >= self.input.len() {
+            None
+        } else {
+            Some(self.input.chars().nth(self.next_position).unwrap())
+        }
+    }
+
     fn read_consecutive_chars(&mut self, predicate: fn(char) -> bool) -> String {
         // We need to go back one position to get the start of the token
         let start = self.next_position - 1;
@@ -56,14 +64,12 @@ impl Lexer {
         self.skip_whitespace();
 
         match self.current_char {
-            '=' => Token::Assign,
             ';' => Token::Semicolon,
             '(' => Token::LParen,
             ')' => Token::RParen,
             ',' => Token::Comma,
             '+' => Token::Plus,
             '-' => Token::Minus,
-            '!' => Token::Bang,
             '*' => Token::Asterisk,
             '/' => Token::Slash,
             '<' => Token::LT,
@@ -71,6 +77,22 @@ impl Lexer {
             '{' => Token::LBrace,
             '}' => Token::RBrace,
             '\0' => Token::EOF,
+            '=' => {
+                if let Some('=') = self.peek_char() {
+                    self.read_char();
+                    Token::EQ
+                } else {
+                    Token::Assign
+                }
+            }
+            '!' => {
+                if let Some('=') = self.peek_char() {
+                    self.read_char();
+                    Token::NE
+                } else {
+                    Token::Bang
+                }
+            }
             '0'..='9' => {
                 let number = self
                     .read_consecutive_chars(|c| c.is_ascii_digit())
@@ -123,6 +145,9 @@ mod exoected {
         } else {
             return false;
         }
+
+        10 == 10;
+        10 != 9;
         "#
         .to_string()
     }
@@ -196,6 +221,14 @@ mod exoected {
             Token::False,
             Token::Semicolon,
             Token::RBrace,
+            Token::Int(10),
+            Token::EQ,
+            Token::Int(10),
+            Token::Semicolon,
+            Token::Int(10),
+            Token::NE,
+            Token::Int(9),
+            Token::Semicolon,
             Token::EOF,
         ]
     }
