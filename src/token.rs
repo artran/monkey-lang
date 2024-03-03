@@ -2,8 +2,8 @@
 pub(crate) enum Token {
     Illegal,
     EOF,
-    // Ident(String),
-    // Int(i32),
+    Ident(String),
+    Int(i32),
     Assign,
     Plus,
     Comma,
@@ -12,6 +12,6 @@ pub(crate) enum Token {
     RParen,
     LBrace,
     RBrace,
-    // Function,
-    // Let,
+    Function,
+    Let,
 }
