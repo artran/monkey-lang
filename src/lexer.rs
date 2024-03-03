@@ -62,6 +62,12 @@ impl Lexer {
             ')' => Token::RParen,
             ',' => Token::Comma,
             '+' => Token::Plus,
+            '-' => Token::Minus,
+            '!' => Token::Bang,
+            '*' => Token::Asterisk,
+            '/' => Token::Slash,
+            '<' => Token::LT,
+            '>' => Token::GT,
             '{' => Token::LBrace,
             '}' => Token::RBrace,
             '\0' => Token::EOF,
@@ -103,6 +109,9 @@ mod exoected {
             x + y;
         };
         let result = add(five, ten);
+
+        !-/*5;
+        5 < 10 > 5;
         "#
         .to_string()
     }
@@ -145,6 +154,18 @@ mod exoected {
             Token::Comma,
             Token::Ident("ten".to_string()),
             Token::RParen,
+            Token::Semicolon,
+            Token::Bang,
+            Token::Minus,
+            Token::Slash,
+            Token::Asterisk,
+            Token::Int(5),
+            Token::Semicolon,
+            Token::Int(5),
+            Token::LT,
+            Token::Int(10),
+            Token::GT,
+            Token::Int(5),
             Token::Semicolon,
             Token::EOF,
         ]
