@@ -20,4 +20,9 @@ pub(crate) enum Token {
     RBrace,
     Function,
     Let,
+    True,
+    False,
+    If,
+    Else,
+    Return,
 }
